@@ -1,9 +1,10 @@
 import { Router } from 'express';
 import Artist from '../models/artistModel';
+import {uploadItemImage} from "../multer";
 
 const artistsRouter = Router();
 
-artistsRouter.get("/", async (req, res) => {
+artistsRouter.get("/", uploadItemImage.single('image'), async (req, res) => {
     try {
         const artists = await Artist.find();
         return res.send(artists);
@@ -15,7 +16,7 @@ artistsRouter.get("/", async (req, res) => {
 artistsRouter.post("/", async (req, res) => {
     const artistData = {
         name: req.body.name,
-        photo: req.body.photo,
+        photo: req.file ? req.file.filename : null,
         information: req.body.information,
     };
 
