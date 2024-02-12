@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import Track from '../models/trackModel';
-
+import { Track as TrackInterface } from "../types";
 
 const tracksRouter = Router();
 
@@ -19,7 +19,7 @@ tracksRouter.get("/", async (req, res) => {
 });
 
 tracksRouter.post("/", async (req, res) => {
-    const trackData = {
+    const trackData:TrackInterface = {
         title: req.body.title,
         album: req.body.album,
         duration: req.body.duration,

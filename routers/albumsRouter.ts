@@ -1,6 +1,7 @@
 import { Router, } from 'express';
 import Album from '../models/albumModel';
 import {uploadItemImage} from '../multer';
+import { Album as AlbumInterface } from "../types";
 
 const albumsRouter = Router();
 
@@ -19,7 +20,7 @@ albumsRouter.get("/", async (req, res) => {
 });
 
 albumsRouter.post("/", uploadItemImage.single('image'),async (req, res) => {
-    const albumData = {
+    const albumData: AlbumInterface  = {
         title: req.body.title,
         artist: req.body.artist,
         year: req.body.year,
