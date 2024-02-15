@@ -30,4 +30,10 @@ interface UserMethods {
     generateToken(): void;
 }
 
+export interface TrackHistory {
+    user: string;
+    track: string;
+    datetime: Date;
+}
+
 type UserModel = Model<UserFields, {}, UserMethods>;
