@@ -4,6 +4,7 @@ import {Route, Routes} from 'react-router-dom';
 import Register from './features/users/Register';
 import Artists from './features/artists/Artists.tsx';
 import Albums from "./features/albums/Albums.tsx";
+import Tracks from './features/tracks/Tracks.tsx';
 
 const App = () => {
 
