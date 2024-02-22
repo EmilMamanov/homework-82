@@ -4,17 +4,17 @@ import path from 'path';
 import { randomUUID } from 'crypto';
 import config from './config';
 
-const storage = (entity: string) => multer.diskStorage({
+const imageStorage = multer.diskStorage({
     destination: async (_req, _file, cb) => {
-        const destDir = path.join(config.publicPath, 'images', entity);
+        const destDir = path.join(config.publicPath, 'images');
         await fs.mkdir(destDir, { recursive: true });
-        cb(null, destDir);
+        cb(null, config.publicPath);
     },
     filename: (_req, file, cb) => {
         const extension = path.extname(file.originalname);
-        const filename = randomUUID() + extension;
+        const filename = path.join('images', randomUUID() + extension);
         cb(null, filename);
     },
 });
 
-export const uploadItemImage = multer({ storage: storage('items') });
+export const uploadItemImage = multer({ storage: imageStorage });

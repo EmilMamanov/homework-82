@@ -35,4 +35,15 @@ tracksRouter.post("/", async (req, res) => {
     }
 });
 
+tracksRouter.get("/:id", async (req, res) => {
+    try {
+        const tracks = await Track.find({ album: req.params.id }).populate('album', 'title');
+        return res.send(tracks);
+    } catch (error) {
+        return res.sendStatus(500);
+    }
+});
+
+
+
 export default tracksRouter;
