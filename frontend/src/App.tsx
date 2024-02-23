@@ -15,6 +15,7 @@ const App = () => {
             <Container maxWidth="xl">
                 <Routes>
                     <Route path="/" element={<Artists />} />
+                    <Route path="/artists/:artistId/albums/:albumId/tracks" element={<Tracks />} />
                     <Route path="/artists/:artistId/albums" element={<Albums />} />
                     <Route path="/register" element={<Register/>} />
                 </Routes>

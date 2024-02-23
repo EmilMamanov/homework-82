@@ -9,6 +9,7 @@ export const store = configureStore({
         users: usersReducer,
         artists: artistsReducer,
         albums: albumsReducer,
+        tracks: tracksReducer,
     }
 });
 
