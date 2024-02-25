@@ -3,23 +3,12 @@ import User from '../models/userModel';
 import Track from "../models/trackModel";
 import TrackHistory from "../models/trackHistoryModel";
 import { TrackHistory as TrackHistoryInterface } from '../types';
+import auth, {RequestWithUser} from "../auth";
 
 const trackHistoryRouter = express.Router();
 
-trackHistoryRouter.post('/', async (req, res) => {
+trackHistoryRouter.post('/', auth, async (req: RequestWithUser, res) => {
     try {
-    const token = req.get('Authorization');
-
-    if (!token) {
-        return res.status(401).send({error: 'No token sent'});
-    }
-
-
-    const user = await User.findOne({token});
-
-    if (!user) {
-        return res.status(401).send({error: 'Wrong token!'});
-    }
 
     const { track } = req.body;
 
@@ -48,12 +37,13 @@ trackHistoryRouter.post('/', async (req, res) => {
                 _id: trackHistory._id,
                 user: req.body.user,
                 track: req.body.track,
-                datetime: req.body.datetime,},
+                datetime: trackHistory.datetime,},
         });
     } catch (error) {
         return res.status(500).send({ error: 'Internal Server Error' });
     }
 
 });
+
 
 export default trackHistoryRouter;

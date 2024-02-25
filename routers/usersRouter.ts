@@ -5,9 +5,7 @@ import { Error } from 'mongoose';
 import auth, {RequestWithUser} from "../auth";
 
 
-
 const usersRouter = express.Router();
-
 
 
 usersRouter.post('/', async (req, res, next) => {
@@ -20,12 +18,13 @@ usersRouter.post('/', async (req, res, next) => {
 
         user.generateToken();
         await user.save();
-        return res.send(user);
+        return res.send({message: 'ok!', user});
     } catch (error) {
         if (error instanceof Error.ValidationError) {
-            return res.status(400).send(error);
+            return res.status(422).send(error);
         }
-        return next(error);
+
+        next(error);
     }
 });
 
