@@ -19,6 +19,7 @@ export interface Track {
     album: string;
     duration: string;
     number: number;
+
 }
 
 
@@ -62,7 +63,12 @@ export interface GlobalError {
 
 export interface TrackHistory {
     _id: string;
-    user: string;
-    track: string;
-    datetime: Date;
+    user: {
+        _id: string;
+    };
+    track: {
+        _id: string;
+        title: string;
+    };
+    datetime: string;
 }

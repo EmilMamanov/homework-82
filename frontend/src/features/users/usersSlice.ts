@@ -60,6 +60,7 @@ export const usersSlice = createSlice( {
 
 export const usersReducer = usersSlice.reducer;
 
+export const selectUserToken = (state: RootState) => state.users.user?.token;
 export const selectUser = (state: RootState) => state.users.user;
 export const selectRegisterLoading = (state: RootState) => state.users.registerLoading;
 export const selectRegisterError = (state: RootState) => state.users.registerError;

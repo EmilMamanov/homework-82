@@ -45,5 +45,22 @@ trackHistoryRouter.post('/', auth, async (req: RequestWithUser, res) => {
 
 });
 
+trackHistoryRouter.get('/', auth, async (req: RequestWithUser, res) => {
+    try {
+        const user = req.user?._id;
+
+        if (!user) {
+            return res.status(401).send({ error: 'Not found!' });
+        }
+
+        const trackHistory = await TrackHistory.find({ user: user })
+            .populate('track', 'title artist');
+
+        return res.send({ message: 'success', trackHistory });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).send({ error: 'Internal Server Error' });
+    }
+});
 
 export default trackHistoryRouter;

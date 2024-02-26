@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {User} from "../../types";
 import {Button, Menu, MenuItem} from "@mui/material";
+import { Link } from 'react-router-dom';
 
 interface Props {
     user: User
@@ -19,6 +20,7 @@ const UserMenu: React.FC<Props> = ({user}) => {
 
     return (
         <>
+            <Link to="/track_history">Track History</Link>
             <Button color="inherit" onClick={handleClick}>
                 Hello, {user.username}!
             </Button>
